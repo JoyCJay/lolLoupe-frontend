@@ -12,7 +12,7 @@
                     <router-link :to="{ name: 'Wiki', query: {} }">Wiki</router-link>
                 </a-menu-item>
                 <a-menu-item key="3">
-                    nav 3
+                    <router-link :to="{ name: 'Wiki', query: {} }">Query</router-link>
                 </a-menu-item>
             </a-menu>
         </a-layout-header>
@@ -23,24 +23,23 @@
             </a-layout>
         </a-layout-content>
 
-        <a-layout-footer style="text-align: center">
-            Footer here
-        </a-layout-footer>
+        <a-layout-footer style="text-align: center"> Current Version {{ version }} </a-layout-footer>
     </a-layout>
 </template>
 
 <script lang="ts">
-// import { UserOutlined, LaptopOutlined, NotificationOutlined } from "@ant-design/icons-vue";
-
+import { mapState } from "vuex";
 export default {
+    components: {},
     data() {
         return {
-            selectedKeys1: ["2"],
-            selectedKeys2: ["1"],
-            openKeys: ["sub1"]
+            selectedKeys1: ["2"]
         };
     },
-    components: {}
+    computed: {
+        ...mapState(["version"]),
+        ...mapState("staticStore", ["count"])
+    }
 };
 </script>
 

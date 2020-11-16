@@ -1,8 +1,13 @@
 import { createStore } from "vuex";
+import { staticStore } from "./modules/static";
 
 export default createStore({
-    state: {},
+    state: {
+        version: "10.23.1"
+    },
     mutations: {},
     actions: {},
-    modules: {}
+    modules: {
+        staticStore
+    }
 });
