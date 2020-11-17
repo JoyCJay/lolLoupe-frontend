@@ -29,6 +29,7 @@
 
 <script lang="ts">
 import { mapState } from "vuex";
+import { get, getCDN } from "./utils/request";
 export default {
     components: {},
     data() {
@@ -39,6 +40,14 @@ export default {
     computed: {
         ...mapState(["version"]),
         ...mapState("staticStore", ["count"])
+    },
+    mounted() {
+        get("/mock/news").then(res => {
+            console.log(res);
+        });
+        getCDN("/plugins/rcp-be-lol-game-data/global/en_gb/v1/champion-summary.json").then(res => {
+            console.log(res);
+        });
     }
 };
 </script>

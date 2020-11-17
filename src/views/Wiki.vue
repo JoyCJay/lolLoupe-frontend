@@ -24,15 +24,21 @@
     <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
         <div class="about">
             <h1>This is an wiki page</h1>
+            <a-avatar :size="128" shape="square" src="https://raw.communitydragon.org/10.23/game/assets/characters/aatrox/hud/aatrox_square.png" />
         </div>
         <router-view />
     </a-layout-content>
 </template>
 
 <script lang="ts">
+import { mapState } from "vuex";
 import { UserOutlined, LaptopOutlined } from "@ant-design/icons-vue";
 
 export default {
+    components: {
+        UserOutlined,
+        LaptopOutlined
+    },
     data() {
         return {
             selectedKeys1: ["2"],
@@ -40,9 +46,8 @@ export default {
             openKeys: ["champions-sub", "items-sub"]
         };
     },
-    components: {
-        UserOutlined,
-        LaptopOutlined
+    computed: {
+        ...mapState(["version"])
     }
 };
 </script>
