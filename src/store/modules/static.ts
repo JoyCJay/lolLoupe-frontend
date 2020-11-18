@@ -13,33 +13,53 @@
  * https://raw.communitydragon.org/10.23/plugins/rcp-be-lol-game-data/global/zh_cn/v1/champion-summary.json
  * https://raw.communitydragon.org/10.23/game/assets/characters/aatrox/hud/
  */
+interface RawChampion {
+    id: number;
+    name: string;
+    alias: string;
+    squarePortraitPath: string;
+    roles: string[];
+}
+
+import { config } from "@/config";
 import { getCDN } from "../../utils/request";
 const state = () => ({
-    count: 0
-})
+    count: 0,
+    championsMap: {}
+});
 
-const getters = {
-
-};
+const getters = {};
 
 const mutations = {
     increment(state: any) {
         state.count++;
+    },
+    setChampionsMap(state: any, championMap: any) {
+        state.championsMap = championMap;
     }
 };
 
 const actions = {
-    hello() {
-        console.log("hello")
+    say(context: any, { msg }) {
+        console.log(msg);
     },
-    loadData() {
-        getCDN("/plugins/rcp-be-lol-game-data/global/en_gb/v1/champion-summary.json", {}, {}).then(res => {
-            console.log(res);
+    loadChampions({ commit }) {
+        const championsMap = {};
+        getCDN(`/plugins/rcp-be-lol-game-data/global/${config.locale}/v1/champion-summary.json`, {}, {}).then((res: any) => {
+            res.data.forEach((ele: RawChampion) => {
+                if (ele.id > 0) {
+                    championsMap[ele.id] = {
+                        name: ele.name,
+                        squarePortraitPath: ele.squarePortraitPath,
+                        roles: ele.roles
+                    };
+                }
+            });
+            commit("setChampionsMap", championsMap);
         });
     },
-    increment ({ state, commit }) {
-        commit('increment');
-        console.log(state);
+    increment({ state, commit }) {
+        commit("increment");
     }
 };
 

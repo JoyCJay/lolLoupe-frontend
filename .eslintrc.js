@@ -14,19 +14,6 @@ module.exports = {
 
         // for typescript
         // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules
-        "@typescript-eslint/member-delimiter-style": [
-            2,
-            {
-                multiline: {
-                    delimiter: "none",
-                    requireLast: true
-                },
-                singleline: {
-                    delimiter: "semi",
-                    requireLast: true
-                }
-            }
-        ],
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-unused-vars": "off" // ["error"]
     }

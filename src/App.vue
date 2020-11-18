@@ -34,10 +34,9 @@
 </template>
 
 <script lang="ts">
-import { useStore, mapState, mapActions } from "vuex";
-import { computed, onMounted, reactive, ref, toRefs } from "vue";
+import { useStore } from "vuex";
+import { computed, onMounted } from "vue";
 import useEventSpace from "./use/event-space";
-import { get, getCDN } from "./utils/request";
 
 export default {
     setup(props, context) {
@@ -47,9 +46,7 @@ export default {
         const version = computed(() => store.state.version);
 
         onMounted(() => {
-            getCDN("/plugins/rcp-be-lol-game-data/global/zh_cn/v1/champion-summary.json", {}, {}).then(res => {
-                console.log(res);
-            });
+            store.dispatch("staticStore/loadChampions");
         });
 
         return {
@@ -71,12 +68,14 @@ export default {
     methods: {
         // null
     },
-    computed: {},
+    computed: {
+        // null
+    },
     mounted() {
-        // console.log(this.$store);
-        get("/mock/news", {}, {}).then(res => {
-            console.log(res);
-        });
+        // console.log(this["$store"].state.staticStore.count);
+        // get("/mock/news", {}, {}).then(res => {
+        //     console.log(res);
+        // });
     }
 };
 </script>
