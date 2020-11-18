@@ -23,29 +23,58 @@
             </a-layout>
         </a-layout-content>
 
-        <a-layout-footer style="text-align: center"> Current Version {{ version }} </a-layout-footer>
+        <a-layout-footer style="text-align: center">
+            Current Version {{ version }}
+            <div>
+                <button @click="increaseCapacity">+</button>
+                <span>Space Left: {{ spacesLeft }} out of {{ capacity }}</span>
+            </div>
+        </a-layout-footer>
     </a-layout>
 </template>
 
 <script lang="ts">
-import { mapState } from "vuex";
+import { useStore, mapState, mapActions } from "vuex";
+import { computed, onMounted, reactive, ref, toRefs } from "vue";
+import useEventSpace from "./use/event-space";
 import { get, getCDN } from "./utils/request";
+
 export default {
-    components: {},
-    data() {
+    setup(props, context) {
+        const { capacity, attendings, spacesLeft, increaseCapacity } = useEventSpace();
+
+        const store = useStore();
+        const version = computed(() => store.state.version);
+
+        onMounted(() => {
+            getCDN("/plugins/rcp-be-lol-game-data/global/zh_cn/v1/champion-summary.json", {}, {}).then(res => {
+                console.log(res);
+            });
+        });
+
         return {
-            selectedKeys1: ["2"]
+            version,
+            // useEventSpace
+            capacity,
+            attendings,
+            spacesLeft,
+            increaseCapacity
         };
     },
-    computed: {
-        ...mapState(["version"]),
-        ...mapState("staticStore", ["count"])
+    components: {},
+    props: {},
+    data() {
+        return {
+            selectedKeys1: ["1"]
+        };
     },
+    methods: {
+        // null
+    },
+    computed: {},
     mounted() {
-        get("/mock/news").then(res => {
-            console.log(res);
-        });
-        getCDN("/plugins/rcp-be-lol-game-data/global/en_gb/v1/champion-summary.json").then(res => {
+        // console.log(this.$store);
+        get("/mock/news", {}, {}).then(res => {
             console.log(res);
         });
     }

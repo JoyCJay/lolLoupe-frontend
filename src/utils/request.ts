@@ -39,36 +39,36 @@ instance.interceptors.request.use(
     }
 );
 
-// /** interceptors for response  **/
-instance.interceptors.response.use(
-    response => {
-        // TODO #1
-        if (response.data.status === "ok") {
-            return Promise.resolve(response.data);
-        } else {
-            // Message({
-            //     message: response.data.message,
-            //     type: "error"
-            // });
-            return Promise.reject(response.data.message);
-        }
-    },
-    error => {
-        // loadingInstance.close();
-        if (error.response) {
-            // 根据请求失败的http状态码去给用户相应的提示
-            const tips = error.response.status in httpCode ? httpCode[error.response.status] : error.response.data.message;
-            console.error(tips);
-            return Promise.reject(error);
-        } else {
-            // Message({
-            //     message: "请求超时, 请刷新重试",
-            //     type: "error"
-            // });
-            return Promise.reject(new Error("请求超时, 请刷新重试"));
-        }
-    }
-);
+// // /** interceptors for response  **/
+// instance.interceptors.response.use(
+//     response => {
+//         // TODO #1
+//         if (response.data.status === "ok") {
+//             return Promise.resolve(response.data);
+//         } else {
+//             // Message({
+//             //     message: response.data.message,
+//             //     type: "error"
+//             // });
+//             return Promise.reject(response.data.message);
+//         }
+//     },
+//     error => {
+//         // loadingInstance.close();
+//         if (error.response) {
+//             // 根据请求失败的http状态码去给用户相应的提示
+//             const tips = error.response.status in httpCode ? httpCode[error.response.status] : error.response.data.message;
+//             console.error(tips);
+//             return Promise.reject(error);
+//         } else {
+//             // Message({
+//             //     message: "请求超时, 请刷新重试",
+//             //     type: "error"
+//             // });
+//             return Promise.reject(new Error("请求超时, 请刷新重试"));
+//         }
+//     }
+// );
 
 /* 统一封装get 和 post请求 */
 const get = (url, params, config = {}) => {

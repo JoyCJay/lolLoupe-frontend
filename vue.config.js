@@ -14,13 +14,6 @@ module.exports = {
                 pathRewrite: {
                     "^/api": ""
                 }
-            },
-            "/mock": {
-                target: "https://www.v2ex.com/api",
-                changeOrigin: true,
-                pathRewrite: {
-                    "^/mock": "asdf"
-                }
             }
         }
     }

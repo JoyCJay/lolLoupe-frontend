@@ -23,10 +23,11 @@ module.exports = {
                 },
                 singleline: {
                     delimiter: "semi",
-                    requireLast: false
+                    requireLast: true
                 }
             }
         ],
-        "@typescript-eslint/no-explicit-any": "off"
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": "off" // ["error"]
     }
 };
