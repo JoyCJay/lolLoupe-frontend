@@ -7,6 +7,7 @@ declare module "@vue/runtime-core" {
     interface State {
         staticStore: {
             count: numbers;
+            championsMap: any;
         };
         version: string;
     }

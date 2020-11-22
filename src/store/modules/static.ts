@@ -11,6 +11,7 @@
  *
  * #Champions:
  * https://raw.communitydragon.org/10.23/plugins/rcp-be-lol-game-data/global/zh_cn/v1/champion-summary.json
+ * http://raw.communitydragon.org/10.23/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/
  * https://raw.communitydragon.org/10.23/game/assets/characters/aatrox/hud/
  */
 interface RawChampion {
@@ -21,11 +22,24 @@ interface RawChampion {
     roles: string[];
 }
 
+interface RawItem {
+    id: number;
+    name: string;
+    description: string;
+    from: number[];
+    to: number[];
+    categories: string[];
+    price: number;
+    priceTotal: number;
+    iconPath: string;
+}
+
 import { config } from "@/config";
 import { getCDN } from "../../utils/request";
 const state = () => ({
     count: 0,
-    championsMap: {}
+    championsMap: {},
+    itemsMap: {}
 });
 
 const getters = {};
@@ -34,8 +48,11 @@ const mutations = {
     increment(state: any) {
         state.count++;
     },
-    setChampionsMap(state: any, championMap: any) {
-        state.championsMap = championMap;
+    setChampionsMap(state: any, { championsMap }) {
+        state.championsMap = championsMap;
+    },
+    setItemsMap(state: any, { itemsMap }) {
+        state.itemsMap = itemsMap;
     }
 };
 
@@ -50,12 +67,31 @@ const actions = {
                 if (ele.id > 0) {
                     championsMap[ele.id] = {
                         name: ele.name,
-                        squarePortraitPath: ele.squarePortraitPath,
+                        squarePortraitPath: `http://raw.communitydragon.org/${config.version}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${ele.id}.png`,
                         roles: ele.roles
                     };
                 }
             });
-            commit("setChampionsMap", championsMap);
+            commit("setChampionsMap", { championsMap });
+        });
+    },
+    loadItems({ commit }) {
+        const itemsMap = {};
+        getCDN(`/plugins/rcp-be-lol-game-data/global/${config.locale}/v1/items.json`, {}, {}).then((res: any) => {
+            res.data.forEach((ele: RawItem) => {
+                itemsMap[ele.id] = {
+                    id: ele.id,
+                    name: ele.name,
+                    description: ele.description,
+                    from: ele.from,
+                    to: ele.to,
+                    categories: ele.categories,
+                    price: ele.price,
+                    priceTotal: ele.priceTotal,
+                    iconPath: ele.iconPath
+                };
+            });
+            commit("setItemsMap", { itemsMap });
         });
     },
     increment({ state, commit }) {

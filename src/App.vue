@@ -46,12 +46,11 @@ export default {
         const version = computed(() => store.state.version);
 
         onMounted(() => {
-            store.dispatch("staticStore/loadChampions");
+            // store.dispatch("staticStore/loadChampions");
         });
 
         return {
             version,
-            // useEventSpace
             capacity,
             attendings,
             spacesLeft,
@@ -71,11 +70,13 @@ export default {
     computed: {
         // null
     },
-    mounted() {
+    created() {
         // console.log(this["$store"].state.staticStore.count);
         // get("/mock/news", {}, {}).then(res => {
         //     console.log(res);
         // });
+        this["$store"].dispatch("staticStore/loadChampions");
+        this["$store"].dispatch("staticStore/loadItems");
     }
 };
 </script>

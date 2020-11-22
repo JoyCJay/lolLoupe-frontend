@@ -26,10 +26,12 @@ const routes: Array<RouteRecordRaw> = [
         children: [
             {
                 path: "champions",
+                name: "wiki-champions",
                 component: Champions
             },
             {
                 path: "items",
+                name: "wiki-items",
                 component: Items
             }
         ]
