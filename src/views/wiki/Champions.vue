@@ -28,8 +28,6 @@
                 <a-divider />
             </a-row>
         </div>
-
-        <a-back-top />
     </div>
 </template>
 

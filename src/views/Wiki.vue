@@ -7,6 +7,7 @@
             <Items />
         </a-tab-pane>
     </a-tabs>
+    <a-back-top />
 </template>
 
 <script lang="ts">

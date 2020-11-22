@@ -24,9 +24,12 @@
                                 </a-card-meta>
                             </a-card>
                             <template #title>
-                                <ul>
+                                <h3>{{ item.name }}</h3>
+                                <span v-html="item.description"></span>
+                                <!-- <ul>
+                                    <li v-html="item.description"></li>
                                     <li v-for="(field, key) in item" :key="key">{{ key }} : {{ field }}</li>
-                                </ul>
+                                </ul> -->
                             </template>
                         </a-tooltip>
                     </a-col>
@@ -51,9 +54,8 @@
                                 </a-card-meta>
                             </a-card>
                             <template #title>
-                                <ul>
-                                    <li v-for="(field, key) in itemsMap[itemID]" :key="key">{{ key }} : {{ field }}</li>
-                                </ul>
+                                <h3>{{ itemsMap[itemID].name }}</h3>
+                                <span v-html="itemsMap[itemID].description"></span>
                             </template>
                         </a-tooltip>
                     </a-col>
@@ -127,6 +129,10 @@ export default {
 }
 
 .ant-tooltip-inner {
-    width: 600px;
+    // width: 300px;
+    h3 {
+        color: white;
+        text-decoration: underline;
+    }
 }
 </style>
