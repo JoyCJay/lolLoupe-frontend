@@ -1,13 +1,13 @@
 <template>
     <div class="about">
-        <h1>This is an champion page</h1>
+        <!-- <h1>This is an champion page</h1> -->
         <a-descriptions size="small" :column="6" style="text-align: center">
             <a-descriptions-item v-for="(role, idx) in roles" :key="idx" :label="role">
                 <a-avatar :size="48" shape="square" :src="roleIcon(role)" />
             </a-descriptions-item>
         </a-descriptions>
 
-        <div style="background-color: #ececec; padding: 20px;">
+        <div style="background-color: #ecf0f1; padding: 20px;">
             <a-row :gutter="20">
                 <a-col :span="3" v-for="(champion, id) in championsMap" :key="id" class="chapion-card-container">
                     <a-card :bordered="false">

@@ -79,17 +79,22 @@ const actions = {
         const itemsMap = {};
         getCDN(`/plugins/rcp-be-lol-game-data/global/${config.locale}/v1/items.json`, {}, {}).then((res: any) => {
             res.data.forEach((ele: RawItem) => {
-                itemsMap[ele.id] = {
-                    id: ele.id,
-                    name: ele.name,
-                    description: ele.description,
-                    from: ele.from,
-                    to: ele.to,
-                    categories: ele.categories,
-                    price: ele.price,
-                    priceTotal: ele.priceTotal,
-                    iconPath: ele.iconPath
-                };
+                if (!ele.name.startsWith("%i:ornnIcon%") && ele.name && ele.priceTotal > 0) {
+                    itemsMap[ele.id] = {
+                        id: ele.id,
+                        name: ele.name,
+                        description: ele.description,
+                        from: ele.from,
+                        to: ele.to,
+                        categories: ele.categories,
+                        price: ele.price,
+                        priceTotal: ele.priceTotal,
+                        iconPath: ele.iconPath
+                            .split("/")
+                            .slice(-1)[0]
+                            .toLowerCase()
+                    };
+                }
             });
             commit("setItemsMap", { itemsMap });
         });
