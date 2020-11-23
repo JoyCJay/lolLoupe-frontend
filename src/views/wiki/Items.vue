@@ -69,9 +69,9 @@
 import { mapState } from "vuex";
 import { config } from "../../config";
 export default {
-    setup() {
-        return {};
-    },
+    // setup() {
+    //     return {};
+    // },
     data() {
         return {
             categoriedItems: {}
