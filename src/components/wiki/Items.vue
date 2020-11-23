@@ -68,7 +68,9 @@
 <script lang="ts">
 import { mapState } from "vuex";
 import { config } from "../../config";
-export default {
+import { Options, Vue } from "vue-class-component";
+
+@Options({
     // setup() {
     //     return {};
     // },
@@ -113,7 +115,8 @@ export default {
     created() {
         this.parseItems();
     }
-};
+})
+export default class Items extends Vue {}
 </script>
 
 <style lang="scss">

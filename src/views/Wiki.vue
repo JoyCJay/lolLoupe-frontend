@@ -13,10 +13,12 @@
 <script lang="ts">
 import { mapState, useStore } from "vuex";
 import { UserOutlined, LaptopOutlined } from "@ant-design/icons-vue";
-import Champions from "./wiki/Champions.vue";
-import Items from "./wiki/Items.vue";
+import Champions from "../components/wiki/Champions.vue";
+import Items from "../components/wiki/Items.vue";
 
-export default {
+import { Options, Vue } from "vue-class-component";
+
+@Options({
     setup() {
         return {};
     },
@@ -30,7 +32,8 @@ export default {
     computed: {
         ...mapState(["version"])
     }
-};
+})
+export default class Wiki extends Vue {}
 </script>
 
 <style lang="scss" scoped></style>

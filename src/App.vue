@@ -12,7 +12,7 @@
                     <router-link :to="{ name: 'Wiki', query: {} }">Wiki</router-link>
                 </a-menu-item>
                 <a-menu-item key="3">
-                    <router-link :to="{ name: 'Wiki', query: {} }">Query</router-link>
+                    <router-link :to="{ name: 'Query', query: {} }">Query</router-link>
                 </a-menu-item>
             </a-menu>
         </a-layout-header>

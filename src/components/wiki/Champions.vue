@@ -36,7 +36,9 @@ import { computed } from "vue";
 import { mapState, useStore } from "vuex";
 import { config } from "../../config";
 
-export default {
+import { Options, Vue } from "vue-class-component";
+
+@Options({
     setup() {
         return {};
     },
@@ -53,7 +55,8 @@ export default {
             };
         }
     }
-};
+})
+export default class Champions extends Vue {}
 </script>
 
 <style scoped>
