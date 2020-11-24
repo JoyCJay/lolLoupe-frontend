@@ -6,7 +6,7 @@
     <div style="padding: 20px;">
         <a-tabs size="large" type="card">
             <a-tab-pane key="all" tab="All items">
-                <a-row :gutter="20">
+                <a-row :gutter="[16, 16]">
                     <a-col :span="2" v-for="(item, id) in itemsMap" :key="id" class="item-card-container">
                         <a-tooltip :arrowPointAtCenter="true">
                             <a-card :bordered="false">
@@ -36,7 +36,7 @@
                 </a-row>
             </a-tab-pane>
             <a-tab-pane v-for="(category, idx) in Object.keys(categoriedItems)" :key="idx" :tab="category">
-                <a-row :gutter="20">
+                <a-row :gutter="[16, 16]">
                     <a-col :span="2" v-for="(itemID, key) in categoriedItems[category]" :key="key" class="item-card-container">
                         <a-tooltip :arrowPointAtCenter="true">
                             <a-card :bordered="false">
@@ -121,14 +121,13 @@ export default class Items extends Vue {}
 
 <style lang="scss">
 .item-card-container {
-    padding: 10px;
-}
-
-.meta {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    // padding: 10px;
+    .meta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
 }
 
 .ant-tooltip-inner {

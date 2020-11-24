@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import { staticStore } from "./modules/static";
+import { queryStore } from "./modules/query";
 
 import { config } from "../config";
 
@@ -10,6 +11,7 @@ export default createStore({
     mutations: {},
     actions: {},
     modules: {
-        staticStore
+        staticStore,
+        queryStore
     }
 });

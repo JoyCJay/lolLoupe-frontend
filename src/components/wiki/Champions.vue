@@ -8,7 +8,7 @@
         </a-descriptions>
 
         <div style="background-color: #ecf0f1; padding: 20px;">
-            <a-row :gutter="20">
+            <a-row :gutter="24">
                 <a-col :span="3" v-for="(champion, id) in championsMap" :key="id" class="chapion-card-container">
                     <a-card :bordered="false">
                         <template #cover>
