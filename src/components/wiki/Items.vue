@@ -11,7 +11,7 @@
                         <a-tooltip :arrowPointAtCenter="true">
                             <a-card :bordered="false">
                                 <template #cover>
-                                    <img alt="example" :src="iconUrl(item.iconPath)" />
+                                    <img alt="example" :src="item.iconPath" />
                                 </template>
                                 <a-card-meta class="meta">
                                     <template #title>
@@ -26,10 +26,6 @@
                             <template #title>
                                 <h3>{{ item.name }}</h3>
                                 <span v-html="item.description"></span>
-                                <!-- <ul>
-                                    <li v-html="item.description"></li>
-                                    <li v-for="(field, key) in item" :key="key">{{ key }} : {{ field }}</li>
-                                </ul> -->
                             </template>
                         </a-tooltip>
                     </a-col>
@@ -41,7 +37,7 @@
                         <a-tooltip :arrowPointAtCenter="true">
                             <a-card :bordered="false">
                                 <template #cover>
-                                    <img alt="example" :src="iconUrl(itemsMap[itemID].iconPath)" />
+                                    <img alt="example" :src="itemsMap[itemID].iconPath" />
                                 </template>
                                 <a-card-meta class="meta">
                                     <template #title>
@@ -71,21 +67,13 @@ import { config } from "../../config";
 import { Options, Vue } from "vue-class-component";
 
 @Options({
-    // setup() {
-    //     return {};
-    // },
     data() {
         return {
             categoriedItems: {}
         };
     },
     computed: {
-        ...mapState("staticStore", ["itemsMap"]),
-        iconUrl() {
-            return fileName => {
-                return `http://raw.communitydragon.org/${config.version}/game/assets/items/icons2d/${fileName}`;
-            };
-        }
+        ...mapState("staticStore", ["itemsMap"])
     },
     methods: {
         parseItems: function() {

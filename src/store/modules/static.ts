@@ -80,6 +80,10 @@ const actions = {
         getCDN(`/plugins/rcp-be-lol-game-data/global/${config.locale}/v1/items.json`, {}, {}).then((res: any) => {
             res.data.forEach((ele: RawItem) => {
                 if (!ele.name.startsWith("%i:ornnIcon%") && ele.name && ele.priceTotal > 0) {
+                    const fileName = ele.iconPath
+                        .split("/")
+                        .slice(-1)[0]
+                        .toLowerCase()
                     itemsMap[ele.id] = {
                         id: ele.id,
                         name: ele.name,
@@ -89,10 +93,7 @@ const actions = {
                         categories: ele.categories,
                         price: ele.price,
                         priceTotal: ele.priceTotal,
-                        iconPath: ele.iconPath
-                            .split("/")
-                            .slice(-1)[0]
-                            .toLowerCase()
+                        iconPath: `http://raw.communitydragon.org/${config.version}/game/assets/items/icons2d/${fileName}`
                     };
                 }
             });
