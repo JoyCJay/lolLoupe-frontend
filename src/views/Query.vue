@@ -41,6 +41,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import { mapActions, mapState } from "vuex";
 // when searchbar is focused, user can star a summoner which is stored in localstorage
 @Options({
     props: {
@@ -48,26 +49,16 @@ import { Options, Vue } from "vue-class-component";
     },
     data() {
         return {
-            loading: false,
-            searchName: "joycjay",
-            summoner: null
+            searchName: "joycjay"
         };
     },
+    computed: {
+        ...mapState("queryStore", ["summoner", "loading"])
+    },
     methods: {
+        ...mapActions("queryStore", ["loadSummoner"]),
         onSearch() {
-            this.loading = true;
-            setTimeout(() => {
-                this.summoner = {
-                    name: this.searchName,
-                    accountId: "-2ZuBG00UOZvnD2Py9BUSCPi4ZxYqeHH8JZC4WWQ5_ejtK8",
-                    id: "zpQamo2g9bfKl9LL9wgtglsEWhQ1_xLM135CPhuT301dSQqK",
-                    profileIconId: 4653,
-                    puuid: "cruzGLItmlBakSkYs4b-7XeTvq_rl1gYXrpzeDS_QvAR0azW2x6GCZJQhxcybKsj9Xby6vUIcY8oqg",
-                    revisionDate: 1604407625000,
-                    summonerLevel: 137
-                };
-                this.loading = false;
-            }, 1000);
+            this.loadSummoner({ summonerName: this.searchName });
         }
     }
 })

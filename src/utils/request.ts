@@ -1,11 +1,11 @@
 import { config } from "../config";
 import axios from "axios";
 
-const instance = axios.create({
+const instanceAPI = axios.create({
     timeout: 5000,
     baseURL: config.apiBaseUrl
 });
-instance.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+instanceAPI.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 const httpCode = {
     400: "请求参数错误",
@@ -19,7 +19,7 @@ const httpCode = {
 };
 
 // /** interceptors for request **/
-instance.interceptors.request.use(
+instanceAPI.interceptors.request.use(
     config => {
         config.headers["token"] = sessionStorage.getItem("token") || "";
         // TODO #1 UI loading
@@ -40,7 +40,7 @@ instance.interceptors.request.use(
 );
 
 // // /** interceptors for response  **/
-// instance.interceptors.response.use(
+// instanceAPI.interceptors.response.use(
 //     response => {
 //         // TODO #1
 //         if (response.data.status === "ok") {
@@ -71,9 +71,9 @@ instance.interceptors.request.use(
 // );
 
 /* 统一封装get 和 post请求 */
-const get = (url, params, config = {}) => {
+const getAPI = (url, params, config = {}) => {
     return new Promise((resolve, reject) => {
-        instance({
+        instanceAPI({
             method: "get",
             url,
             params,
@@ -88,9 +88,9 @@ const get = (url, params, config = {}) => {
     });
 };
 
-const post = (url, data, config = {}) => {
+const postAPI = (url, data, config = {}) => {
     return new Promise((resolve, reject) => {
-        instance({
+        instanceAPI({
             method: "post",
             url,
             data,
@@ -123,4 +123,4 @@ const getCDN = (url, params, config = {}) => {
     });
 };
 
-export { get, post, getCDN };
+export { getAPI, postAPI, getCDN };

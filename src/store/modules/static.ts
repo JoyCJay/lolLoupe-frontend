@@ -83,7 +83,7 @@ const actions = {
                     const fileName = ele.iconPath
                         .split("/")
                         .slice(-1)[0]
-                        .toLowerCase()
+                        .toLowerCase();
                     itemsMap[ele.id] = {
                         id: ele.id,
                         name: ele.name,
