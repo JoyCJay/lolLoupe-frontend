@@ -16,24 +16,24 @@
     <a-row type="flex" justify="center" align="top">
         <a-col :span="6">
             <div class="my-card solo-rank-card">
-                solo rank info
+                <soloRank></soloRank>
             </div>
 
             <div class="my-card flex-rank-card">
-                flex rank info
+                <flexRank></flexRank>
             </div>
 
             <div class="my-card rank-champions-card">
-                rank champions statistic
+                <rankChampionsStatistic></rankChampionsStatistic>
             </div>
         </a-col>
         <a-col :span="18">
             <div class="my-card charts-card">
-                charts display
+                <chartsDisplay></chartsDisplay>
             </div>
 
             <div class="my-card matches-list-card">
-                matches-list
+                <machesList></machesList>
             </div>
         </a-col>
     </a-row>
@@ -43,10 +43,18 @@
 import { Options, Vue } from "vue-class-component";
 import { mapActions, mapState } from "vuex";
 // when searchbar is focused, user can star a summoner which is stored in localstorage
+
+import SoloRank from "../components/query/SoloRank.vue";
+import FlexRank from "../components/query/FlexRank.vue";
+import RankChampionsStatistic from "../components/query/RankChampionsStatistic.vue";
+import ChartsDisplay from "../components/query/ChartsDisplay.vue";
+import MachesList from "../components/query/matches/MachesList.vue";
+
 @Options({
     props: {
         msg: String
     },
+    components: { SoloRank, FlexRank, RankChampionsStatistic, ChartsDisplay, MachesList },
     data() {
         return {
             searchName: "joycjay"
@@ -56,9 +64,11 @@ import { mapActions, mapState } from "vuex";
         ...mapState("queryStore", ["summoner", "loading"])
     },
     methods: {
-        ...mapActions("queryStore", ["loadSummoner"]),
+        ...mapActions("queryStore", ["loadSummoner", "loadMatches"]),
         onSearch() {
-            this.loadSummoner({ summonerName: this.searchName });
+            this.loadSummoner({ summonerName: this.searchName }).then(res => {
+                this.loadMatches({ pagination: 1 });
+            });
         }
     }
 })

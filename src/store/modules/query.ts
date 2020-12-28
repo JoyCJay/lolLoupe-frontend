@@ -11,9 +11,20 @@ interface Summoner {
     summonerLevel: number;
 }
 
-const state = () => ({
+interface Match {
+    meta: any;
+    bluePlayers: any;
+    redPlayers: any;
+}
+
+const state = (): {
+    loading: boolean;
+    summoner: any;
+    matchesMap: Map<string, any>;
+} => ({
     loading: false,
-    summoner: null
+    summoner: null,
+    matchesMap: new Map()
 });
 
 const getters = {};
@@ -25,6 +36,13 @@ const mutations = {
     setChampionsMap(state: any, { summoner }) {
         state.summoner = summoner;
         state.loading = false;
+    },
+    setMatches(state: any, { matches }) {
+        for (const m of matches) {
+            state.matchesMap.set(m.meta.gameId, m);
+        }
+        console.log(state.matchesMap);
+        state.loading = false;
     }
 };
 
@@ -34,6 +52,12 @@ const actions = {
         const response: any = await getAPI(`/consult/summoner/by-name/${summonerName}`, {});
         const summoner = response.data;
         commit("setChampionsMap", { summoner: summoner });
+    },
+    async loadMatches({ state, commit }, { pagination }): Promise<void> {
+        commit("setLoading", { loading: true });
+        const apiUrl = `/consult/matches/${state.summoner.accountId}/${pagination}`;
+        const response: any = await getAPI(apiUrl, {});
+        commit("setMatches", { matches: response.data });
     }
 };
 
