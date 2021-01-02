@@ -2,15 +2,47 @@ language: node_js
 node_js:
   - "12"
 
+branches:
+  only:
+    - master
+
+services:
+  - docker
+
+# The complete sequence of phases of a job is the lifecycle:
+# OPTIONAL Install
+apt addons: skip
+
+# OPTIONAL Install
+cache components: skip
+
+before_install:
+  -  docker build -t joycjay/lol-loupe:dev-front .
+
 install:
   - npm install
+
+before_script: skip
 
 script:
   - npm run build
 
-after_success:
-  - echo build finished
+# OPTIONAL (if and only if caching is effective)
+before_cache: skip
 
-branches:
-  only:
-    - master
+after_success:
+  - echo script success
+after_failure:
+  - echo script failed
+
+# OPTIONAL (if and only if deployment is active)
+before_deploy: skip
+
+# OPTIONAL 
+deploy:
+  skip_cleanup: true
+
+# OPTIONAL (if and only if deployment is active)
+after_deploy: skip
+
+after_script: skip
