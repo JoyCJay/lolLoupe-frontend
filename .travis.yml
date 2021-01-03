@@ -16,36 +16,33 @@ apt addons: skip
 # OPTIONAL Install
 cache components: skip
 
-before_install:
-  - docker login -u ${DHUB_USERNAME} -p ${DHUB_PASSSWORD}
-  -  docker build -t joycjay/lol-loupe:dev-front .
+before_install: skip
 
-install:
-  - npm install
+install: skip
+  # - npm install
 
 before_script: skip
 
 script:
-  - npm run build
-
+  # - npm run build
+  - docker login -u ${DHUB_USERNAME} -p ${DHUB_PASSSWORD}
+  - docker build -t joycjay/lol-loupe:dev-front .
 # OPTIONAL (if and only if caching is effective)
 before_cache: skip
 
 after_success:
-  - echo script success
   - docker push joycjay/lol-loupe:dev-front
-  - echo ${DHUB_USERNAME}
 after_failure:
   - echo script failed
 
 # OPTIONAL (if and only if deployment is active)
-before_deploy: skip
+# before_deploy: skip
 
 # OPTIONAL 
-deploy: skip
+# deploy: skip
   # skip_cleanup: true
 
 # OPTIONAL (if and only if deployment is active)
-after_deploy: skip
+# after_deploy: skip
 
-after_script: skip
+# after_script: skip
