@@ -17,6 +17,7 @@ apt addons: skip
 cache components: skip
 
 before_install:
+  - docker login -u ${DHUB_USERNAME} -p ${DHUB_PASSSWORD}
   -  docker build -t joycjay/lol-loupe:dev-front .
 
 install:
@@ -32,6 +33,8 @@ before_cache: skip
 
 after_success:
   - echo script success
+  - docker push joycjay/lol-loupe:dev-front
+  - echo ${DHUB_USERNAME}
 after_failure:
   - echo script failed
 
@@ -39,8 +42,8 @@ after_failure:
 before_deploy: skip
 
 # OPTIONAL 
-deploy:
-  skip_cleanup: true
+deploy: skip
+  # skip_cleanup: true
 
 # OPTIONAL (if and only if deployment is active)
 after_deploy: skip
