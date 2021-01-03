@@ -6,6 +6,10 @@ branches:
   - master
 services:
 - docker
+addons:
+  ssh_known_hosts:
+  - 42.192.95.242
+# lifecycles
 apt addons: skip
 cache components: skip
 before_install:
