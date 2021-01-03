@@ -26,6 +26,6 @@ script:
 before_cache: skip
 after_success:
 - docker push joycjay/lol-loupe:dev-front
-- ssh ubuntu@42.192.95.242 "date >> test.log"
+- ssh -o "StrictHostKeyChecking no" ubuntu@42.192.95.242 -i ~/.ssh/id_rsa "date >> test.log"
 after_failure:
 - echo script failed
