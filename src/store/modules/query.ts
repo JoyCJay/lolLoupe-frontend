@@ -1,22 +1,6 @@
 import { config } from "@/config";
 import { getAPI } from "../../utils/request";
 
-interface Summoner {
-    accountId: string;
-    id: string;
-    name: string;
-    profileIconId: number;
-    puuid: string;
-    revisionDate: number;
-    summonerLevel: number;
-}
-
-interface Match {
-    meta: any;
-    bluePlayers: any;
-    redPlayers: any;
-}
-
 const state = (): {
     loading: boolean;
     summoner: any;
@@ -60,6 +44,7 @@ const actions = {
         commit("setMatches", { matches: response.data });
     }
 };
+
 
 const queryStore = {
     namespaced: true,

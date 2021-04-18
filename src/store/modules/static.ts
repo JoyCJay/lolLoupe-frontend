@@ -14,28 +14,11 @@
  * http://raw.communitydragon.org/10.23/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/
  * https://raw.communitydragon.org/10.23/game/assets/characters/aatrox/hud/
  */
-interface RawChampion {
-    id: number;
-    name: string;
-    alias: string;
-    squarePortraitPath: string;
-    roles: string[];
-}
-
-interface RawItem {
-    id: number;
-    name: string;
-    description: string;
-    from: number[];
-    to: number[];
-    categories: string[];
-    price: number;
-    priceTotal: number;
-    iconPath: string;
-}
 
 import { config } from "@/config";
+import { RawChampion, RawItem } from "@/types";
 import { getCDN } from "../../utils/request";
+
 const state = () => ({
     count: 0,
     championsMap: {},

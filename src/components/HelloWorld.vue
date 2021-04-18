@@ -64,11 +64,17 @@
 </template>
 
 <script lang="ts">
+import { Summoner } from "@/types";
+import { PropType } from "@vue/runtime-core";
 import { Options, Vue } from "vue-class-component";
 
 @Options({
     props: {
-        msg: String
+        msg: String,
+        cjObject: {
+            type: Object as PropType<Summoner>,
+            required: false
+        }
     }
 })
 export default class HelloWorld extends Vue {
