@@ -5,10 +5,12 @@ const state = (): {
     loading: boolean;
     summoner: any;
     matchesMap: Map<string, any>;
+    allMatchesMap: Map<string, any>;
 } => ({
     loading: false,
     summoner: null,
-    matchesMap: new Map()
+    matchesMap: new Map<string, any>(),
+    allMatchesMap: new Map<string, any>()
 });
 
 const getters = {};
@@ -22,10 +24,13 @@ const mutations = {
         state.loading = false;
     },
     setMatches(state: any, { matches }) {
+        state.matchesMap = new Map<string, any>();
         for (const m of matches) {
             state.matchesMap.set(m.meta.gameId, m);
+            state.allMatchesMap.set(m.meta.gameId, m);
+
         }
-        console.log(state.matchesMap);
+        console.log(state.allMatchesMap);
         state.loading = false;
     }
 };

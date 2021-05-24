@@ -8,8 +8,16 @@ export default createStore({
     state: {
         version: config.version
     },
-    mutations: {},
-    actions: {},
+    mutations: {
+        testMutation(state, payload) {
+            console.log('testMutation', state, payload);
+        }
+    },
+    actions: {
+        testAction(ctx, payload) {
+            console.log('testAction', ctx, payload);
+        }
+    },
     modules: {
         staticStore,
         queryStore

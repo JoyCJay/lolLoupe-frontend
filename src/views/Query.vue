@@ -113,5 +113,8 @@ export default class Query extends Vue {
 .matches-list-card {
     height: 1000px;
     margin-left: 10px;
+
+    display: flex;
+    flex-direction: column;
 }
 </style>
