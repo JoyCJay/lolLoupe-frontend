@@ -1,11 +1,11 @@
 <template>
     <div class="list-container" v-if="matchesMap.size > 0">
-        <a-collapse v-model:activeKey="activeKey" :bordered="true" expandIconPosition="right">
+        <a-collapse class="antd-collapse" v-model:activeKey="activeKey" :bordered="true" expandIconPosition="right">
             <a-collapse-panel :header="`Match: ${matchKey}`" :disabled="spinning" v-for="[matchKey] in matchesMap.entries()" :key="matchKey">
                 <matchDetail :matchId="matchKey"></matchDetail>
             </a-collapse-panel>
         </a-collapse>
-        <span>{{ activeKey }}</span>
+        <!-- <span>{{ activeKey }}</span> -->
 
         <div class="matches-pagination-container">
             <a-pagination v-model:current="currentPagination" :disabled="spinning" :total="25" :pageSize="5" @change="onChange" />
@@ -21,9 +21,7 @@
 <script lang="ts">
 import { defineComponent, computed, ref } from "vue";
 import { mapState, useStore } from "vuex";
-import { config } from "../../../config";
 
-import { Options, Vue } from "vue-class-component";
 import MatchDetail from "../matches/MatchDetail.vue";
 
 // matches list collapse
@@ -60,18 +58,11 @@ export default defineComponent({
     },
     components: { MatchDetail },
     data() {
-        return {
-            roles: ["tank", "fighter", "assassin", "mage", "marksman", "support"]
-        };
+        return {};
     },
     computed: {
         ...mapState("staticStore", ["championsMap"]),
-        ...mapState("queryStore", ["matchesMap"]),
-        roleIcon() {
-            return role => {
-                return `https://raw.communitydragon.org/${config.version}/plugins/rcp-fe-lol-champion-details/global/default/role-icon-${role}.png`;
-            };
-        }
+        ...mapState("queryStore", ["matchesMap"])
     },
     mounted() {
         expandAllCurrentMatchesList(activeKey, this.matchesMap);
@@ -79,7 +70,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 div.list-container {
     height: 100%;
     width: 100%;
@@ -88,14 +79,17 @@ div.list-container {
     margin: 0;
 }
 
-li {
-    border: 1px solid yellowgreen;
-    margin: 10px;
+.antd-collapse {
+    overflow: auto;
+    height: 100%;
 }
 
 .matches-pagination-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    position: relative;
+    top: 20px;
 }
 </style>

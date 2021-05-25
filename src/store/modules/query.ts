@@ -1,16 +1,17 @@
 import { config } from "@/config";
+import { Match } from "@/types";
 import { getAPI } from "../../utils/request";
 
 const state = (): {
     loading: boolean;
     summoner: any;
-    matchesMap: Map<string, any>;
-    allMatchesMap: Map<string, any>;
+    matchesMap: Map<string, Match>;
+    allMatchesMap: Map<string, Match>;
 } => ({
     loading: false,
     summoner: null,
-    matchesMap: new Map<string, any>(),
-    allMatchesMap: new Map<string, any>()
+    matchesMap: new Map<string, Match>(),
+    allMatchesMap: new Map<string, Match>()
 });
 
 const getters = {};
@@ -24,7 +25,7 @@ const mutations = {
         state.loading = false;
     },
     setMatches(state: any, { matches }) {
-        state.matchesMap = new Map<string, any>();
+        state.matchesMap = new Map<string, Match>();
         for (const m of matches) {
             state.matchesMap.set(m.meta.gameId, m);
             state.allMatchesMap.set(m.meta.gameId, m);
