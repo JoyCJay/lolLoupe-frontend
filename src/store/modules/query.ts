@@ -31,7 +31,6 @@ const mutations = {
             state.allMatchesMap.set(m.meta.gameId, m);
 
         }
-        console.log(state.allMatchesMap);
         state.loading = false;
     }
 };

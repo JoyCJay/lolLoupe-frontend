@@ -13,10 +13,15 @@
         </div>
 
         <div class="team red-team">
+            <!-- red team -->
             <!-- <div class="ag-grid-container">
                 <ag-grid-vue style="height: 100%" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"> </ag-grid-vue>
             </div> -->
-            red team
+            <ul>
+                <li v-for="(redPlayer, idx) in redPlayers" :key="idx">
+                    <playerPerformance :playerPerformance="redPlayer"></playerPerformance>
+                </li>
+            </ul>
         </div>
     </div>
 </template>

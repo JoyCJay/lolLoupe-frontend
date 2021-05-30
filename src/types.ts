@@ -25,6 +25,18 @@ export interface RawItem {
     iconPath: string;
 }
 
+export interface Ward {
+    id: number;
+    name: string;
+    iconPath: string;
+}
+
+export interface Spell {
+    id: number;
+    name: string;
+    url: string;
+}
+
 // Match Info URL segement: ./query
 export interface Summoner {
     accountId: string;

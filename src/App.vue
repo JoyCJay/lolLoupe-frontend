@@ -71,7 +71,6 @@ export default {
         // null
     },
     created() {
-        // console.log(this["$store"].state.staticStore.count);
         // get("/mock/news", {}, {}).then(res => {
         //     console.log(res);
         // });

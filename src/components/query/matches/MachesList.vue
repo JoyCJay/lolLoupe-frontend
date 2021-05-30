@@ -39,7 +39,7 @@ export default defineComponent({
     setup() {
         const store = useStore();
 
-        console.log("cj debug store", store);
+        console.log("debug store", store);
 
         expandAllCurrentMatchesList(activeKey, store.state.queryStore.matchesMap);
         // pagination
